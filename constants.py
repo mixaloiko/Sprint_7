@@ -1,9 +1,8 @@
 BASE_URL = 'https://qa-scooter.praktikum-services.ru'
 COURIER_LOGIN_URL = '/api/v1/courier/login'
 COURIER_CREATE_URL = '/api/v1/courier'
-COURIER_DELETE_URL = '/api/v1/courier/{}'
-COURIER_LIST_ORDERS_URL = '/api/v1/courier/{}/ordersCount'
-ORDERS_URL = '/api/v1/orders/finish/{}'
+ORDERS_URL = '/api/v1/orders'
+
 
 OK_RESPONSE = '{"ok":true}'
 DUPLICATE_COURIER_ERROR = '{"code":409,"message":"Этот логин уже используется. Попробуйте другой."}'

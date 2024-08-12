@@ -1,15 +1,17 @@
+import allure
 import requests
 
 from constants import *
 from helpers import register_new_courier_and_return_login_password, generate_random_string
 
 
+@allure.title('Проверить, что курьер может авторизоваться')
 def test_login_courier():
-    # создать курьера и записать результат создания в переменную courier_data
+    #Создать курьера и записать результат создания в переменную courier_data
     courier_data = register_new_courier_and_return_login_password()
-    # проверить, что переменная courier_data содержит два и более элемента
+    #Проверить, что переменная courier_data содержит два и более элемента
     if len(courier_data) == 3:
-        # создать payload на логин и отправить post запрос на логин, получить ответ
+        #'Создать payload на логин и отправить post запрос на логин, получить ответ
         payload = {
             "login": courier_data[0],
             "password": courier_data[1]
@@ -20,11 +22,12 @@ def test_login_courier():
         raise Exception("Проблема при создании курьера")
 
 
+@allure.title('Проверить, что вернется сообщение об ошибке при неверном пароле')
 def test_login_courier_incorrect_password():
     courier_data = register_new_courier_and_return_login_password()
-    # проверить, что переменная courier_data содержит два и более элемента
+    #Проверить, что переменная courier_data содержит два и более элемента
     if len(courier_data) == 3:
-        # создать payload на логин и отправить post запрос на логин, получить ответ
+        #'Создать payload на логин и отправить post запрос на логин, получить ответ
         payload = {
             "login": courier_data[0],
             "password": '00000'
@@ -35,8 +38,9 @@ def test_login_courier_incorrect_password():
         raise Exception("Проблема при создании курьера")
 
 
+@allure.title('Проверить, что вернется сообщение об ошибке при неверном логине')
 def test_login_courier_incorrect_login():
-    # создать payload на логин и отправить post запрос на логин, получить ответ
+    #'Создать payload на логин и отправить post запрос на логин, получить ответ
     payload = {
         "login": generate_random_string(10),
         "password": generate_random_string(10)
@@ -45,8 +49,9 @@ def test_login_courier_incorrect_login():
     assert response.status_code == 404 and response.text == INCORRECT_LOGIN_OR_PASSWORD
 
 
+@allure.title('Проверить, что вернется сообщение об ошибке при незаполненном поле')
 def test_login_courier_missing_field():
-    # создать payload на логин и отправить post запрос на логин, получить ответ
+    #Создать payload на логин и отправить post запрос на логин, получить ответ
     payload = {
         "password": generate_random_string(10)
     }
